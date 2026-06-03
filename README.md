@@ -1,10 +1,10 @@
-# Monitoring Sensor IoT Realtime dengan Firebase
+# Monitoring Sensor IOT dari tim AIKOO!!!
 
-Aplikasi monitoring sensor (Suhu & Cahaya) dan kontrol Relay secara realtime berbasis **Firebase Realtime Database** dan **Firebase Authentication**. Dirancang khusus sebagai panduan lengkap untuk keperluan Ujian Kompetensi Keahlian (Ujikom).
+Halo guyss!!!111!!11, disni kita bakal ngasih tau tentang project di ujikom kita, mohon liat liat dulu
 
 ---
 
-## 🛠️ Langkah 1: Setup Firebase Console
+## 🛠️ Langkah kita membuat ini 1: Setup Firebase Console
 
 ### 1.1 Membuat Project Baru
 1. Buka **[Firebase Console](https://console.firebase.google.com/)** lalu login menggunakan akun Google Anda.

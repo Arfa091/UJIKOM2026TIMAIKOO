@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Smart IoT Dashboard | Big GIF Edition</title>
+  <title>Smart IoT Dashboard | Manual Mode Total</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -27,7 +27,6 @@
       min-height: 100vh;
     }
 
-    /* Sidebar */
     .sidebar {
       width: 280px;
       background: rgba(15, 12, 41, 0.9);
@@ -47,7 +46,6 @@
       text-align: center;
     }
 
-    /* Logo GIF - DC Comics */
     .logo-gif {
       width: 100px;
       height: 100px;
@@ -92,14 +90,12 @@
     }
     .logout-btn { margin-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px; }
 
-    /* Main Content */
     .main-content {
       flex: 1;
       margin-left: 280px;
       padding: 25px 35px;
     }
 
-    /* Top Bar */
     .top-bar {
       background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(10px);
@@ -123,7 +119,6 @@
       border-radius: 40px;
     }
 
-    /* Status Bar */
     .status-bar {
       background: rgba(0, 0, 0, 0.4);
       backdrop-filter: blur(10px);
@@ -143,7 +138,6 @@
     }
     @keyframes pulse { 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:0.5; transform:scale(1.2); } }
 
-    /* Cards Grid */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -169,7 +163,6 @@
     }
     .sensor-title { font-size: 16px; font-weight: 600; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px; }
     
-    /* Gaya untuk GIF di dalam card */
     .card-gif {
       width: 85px;
       height: 85px;
@@ -180,7 +173,6 @@
     }
     .sensor-card:hover .card-gif { transform: scale(1.08) rotate(2deg); }
 
-    /* GIF Relay khusus */
     .relay-gif {
       width: 90px;
       height: 90px;
@@ -188,7 +180,6 @@
       border-radius: 20px;
       transition: transform 0.2s;
     }
-    .sensor-card:hover .relay-gif { transform: scale(1.08); }
 
     .sensor-value {
       font-size: 48px;
@@ -209,19 +200,42 @@
     }
     .status-online { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
     .status-warning { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+    .status-manual { background: rgba(168, 85, 247, 0.3); color: #c084fc; }
     .timestamp { font-size: 10px; opacity: 0.5; margin-top: 12px; }
 
-    /* Relay Card */
     .relay-card { background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(124, 58, 237, 0.1)); }
+    
+    .manual-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 15px;
+    }
     .relay-btn {
       background: linear-gradient(135deg, #a855f7, #7c3aed);
       border: none; padding: 10px; border-radius: 40px; color: white;
-      font-weight: 600; cursor: pointer; width: 100%; margin-top: 15px;
+      font-weight: 600; cursor: pointer; flex: 1;
       transition: 0.2s;
     }
-    .relay-btn:hover { transform: scale(1.02); opacity: 0.9; }
+    .relay-btn-on {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+    }
+    .relay-btn-on:hover {
+      background: linear-gradient(135deg, #dc2626, #b91c1c);
+    }
+    .relay-btn-off {
+      background: linear-gradient(135deg, #6b7280, #4b5563);
+    }
+    .relay-btn-off:hover {
+      background: linear-gradient(135deg, #4b5563, #374151);
+    }
+    .mode-toggle-btn {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      margin-bottom: 12px;
+    }
+    .mode-auto-btn {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+    }
 
-    /* Notifications */
     .notifications-panel {
       background: rgba(0, 0, 0, 0.4);
       backdrop-filter: blur(12px);
@@ -236,17 +250,6 @@
       margin-bottom: 15px;
       padding-bottom: 10px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .notifications-header h3 {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .header-notif-gif {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      object-fit: cover;
     }
     .notification-item {
       display: flex;
@@ -272,7 +275,6 @@
       border-radius: 20px; color: white; cursor: pointer;
     }
 
-    /* Chart */
     .chart-section {
       background: rgba(0, 0, 0, 0.4);
       backdrop-filter: blur(12px);
@@ -293,7 +295,6 @@
     }
     .chart-container { height: 280px; }
 
-    /* Jam Digital */
     .clock-digital {
       font-size: 42px;
       font-weight: 800;
@@ -317,32 +318,32 @@
       .main-content { margin-left: 0; padding: 15px; }
       .card-gif, .relay-gif { width: 65px; height: 65px; }
       .clock-digital { font-size: 32px; }
+      .manual-buttons { flex-direction: column; }
     }
   </style>
 </head>
 <body>
 <div class="dashboard-container">
-  <!-- SIDEBAR dengan LOGO DC -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <img src="https://media.tenor.com/DrbwfbaaojoAAAAj/dc-detective-comics.gif" alt="DC Logo" class="logo-gif" onerror="this.src='https://media4.giphy.com/media/3o7abB06u9bNzA8LC8/giphy.gif'">
       <h2>Smart<span style="color:#a855f7;">IoT</span></h2>
-      <p>Real-time Animated</p>
+      <p>Manual Mode = Total Control</p>
     </div>
     <ul class="nav-menu">
-      <li class="nav-item"><a href="#" class="nav-link active">📊 Dashboard</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">🌡️ Sensor</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">📜 Riwayat</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">⚙️ Pengaturan</a></li>
-      <li class="nav-item logout-btn"><a href="#" class="nav-link" id="logoutBtn">🚪 Keluar</a></li>
-    </ul>
+  <li class="nav-item"><a href="dashboard.html" class="nav-link active">📊 Dashboard</a></li>
+  <li class="nav-item"><a href="#" class="nav-link" id="navSensorLink">🌡️ Sensor</a></li>
+  <li class="nav-item"><a href="#" class="nav-link" id="navRiwayatLink">📜 Riwayat</a></li>
+  <li class="nav-item"><a href="pengaturan.html" class="nav-link" id="navPengaturanLink">⚙️ Pengaturan</a></li>
+  <li class="nav-item logout-btn"><a href="#" class="nav-link" id="logoutBtn">🚪 Keluar</a></li>
+</ul>
   </aside>
 
   <main class="main-content">
     <div class="top-bar">
       <div class="page-title">
-        <h1>✨ Animated Dashboard</h1>
-        <p>Relay ON jika Suhu > 30°C <span style="color:#a855f7">ATAU</span> Cahaya < 100 lx</p>
+        <h1>✨ Manual Mode = Total Control</h1>
+        <p>Mode Manual: <span style="color:#f59e0b">Abaikan suhu & cahaya sepenuhnya!</span> | Mode Auto: Ikuti aturan</p>
       </div>
       <div class="user-info"><span>👤</span> <span id="userEmail">Loading...</span></div>
     </div>
@@ -352,9 +353,7 @@
       <div id="lastUpdate">-</div>
     </div>
 
-    <!-- CARDS dengan GIF BESAR -->
     <div class="cards-grid">
-      <!-- SUHU CARD -->
       <div class="sensor-card">
         <div class="sensor-header">
           <span class="sensor-title">🌡️ SUHU</span>
@@ -365,7 +364,6 @@
         <div class="timestamp" id="suhuTime">⏱️ --:--:--</div>
       </div>
 
-      <!-- CAHAYA CARD -->
       <div class="sensor-card">
         <div class="sensor-header">
           <span class="sensor-title">💡 CAHAYA</span>
@@ -376,18 +374,28 @@
         <div class="timestamp" id="cahayaTime">⏱️ --:--:--</div>
       </div>
 
-      <!-- RELAY CARD dengan GIF Nintendo Switch -->
       <div class="sensor-card relay-card">
         <div class="sensor-header">
           <span class="sensor-title">🔌 RELAY</span>
           <img src="https://media1.tenor.com/m/OXRE1DOXQWsAAAAC/nintendo-switch-2-switch-2.gif" alt="Switch Relay" class="relay-gif" id="relayGif">
         </div>
         <div class="sensor-value" id="relayValue" style="font-size: 40px;">--</div>
-        <button class="relay-btn" id="manualRelayBtn">🔧 Manual Control</button>
+        
+        <!-- Tombol Mode: Manual atau Auto -->
+        <div style="display: flex; gap: 12px; margin-top: 10px;">
+          <button class="relay-btn mode-toggle-btn" id="manualModeBtn" style="flex:1;">🔧 Mode Manual</button>
+          <button class="relay-btn mode-auto-btn" id="autoModeBtn" style="flex:1;">🤖 Mode Auto</button>
+        </div>
+        
+        <!-- Tombol Manual ON/OFF - hanya muncul saat mode manual -->
+        <div class="manual-buttons" id="manualButtons" style="display: none;">
+          <button class="relay-btn relay-btn-on" id="manualOnBtn">🔴 NYALAKAN (ON)</button>
+          <button class="relay-btn relay-btn-off" id="manualOffBtn">⚫ MATIKAN (OFF)</button>
+        </div>
+        
         <div class="timestamp" id="relayTime">Status: Menunggu</div>
       </div>
 
-      <!-- WAKTU CARD - DIGANTI DENGAN JAM + GIF KUCING -->
       <div class="sensor-card">
         <div class="sensor-header">
           <span class="sensor-title">🕐 WAKTU</span>
@@ -395,30 +403,24 @@
         </div>
         <div class="clock-digital" id="jamDigital">--:--:--</div>
         <div class="date-digital" id="tanggalDigital">--, -- -- ----</div>
-        <div class="sensor-status status-online" id="waktuStatus">Live Update</div>
+        <div class="sensor-status status-online" id="waktuStatus">Menunggu</div>
         <div class="timestamp" id="waktuTime">⏱️ Setiap detik</div>
       </div>
     </div>
 
-    <!-- NOTIFIKASI dengan GIF pentol -->
     <div class="notifications-panel">
       <div class="notifications-header">
-        <h3>
-          <img src="https://media1.tenor.com/m/YwGfw1n8bTYAAAAC/ompangie-pentol.gif" class="header-notif-gif" alt="pentol">
-          Live Notifications
-        </h3>
-        <button class="clear-btn" id="clearNotifBtn">Hapus Semua</button>
+        <h3>🔔 Notifikasi</h3>
+        <button class="clear-btn" id="clearNotifBtn">Hapus</button>
       </div>
       <div id="notifContainer">
         <div class="notification-item">
-          <img src="https://media1.tenor.com/m/YwGfw1n8bTYAAAAC/ompangie-pentol.gif" class="notif-gif" alt="pentol">
-          <div class="notif-text">🚀 Dashboard siap! Relay akan bereaksi otomatis.</div>
+          <div class="notif-text">🚀 Dashboard siap. Mode Manual = Total Control (abaikan sensor)</div>
           <div class="notif-time">Sekarang</div>
         </div>
       </div>
     </div>
 
-    <!-- CHART -->
     <div class="chart-section">
       <div class="chart-header">
         <h3>📈 Tren Sensor (20 point terakhir)</h3>
@@ -437,7 +439,6 @@
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
   import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-  // Konfigurasi Firebase
   const firebaseConfig = {
     apiKey: "AIzaSyARWeAhj8vNXTeDwDe1a15hm-uzhPPwjC0",
     authDomain: "monitoring-iot-6daae.firebaseapp.com",
@@ -452,86 +453,63 @@
   const auth = getAuth(app);
   const db = getDatabase(app);
 
-  // VARIABEL GLOBAL
+  // ========== VARIABEL ==========
   let chart;
   let history = { suhu: [], cahaya: [], timestamps: [] };
   let currentRelay = 0;
-  let manualMode = false;
+  let manualMode = false;  // false = Auto, true = Manual
   let notifications = [];
+  let isUpdatingFromDashboard = false;  // Cegah loop
 
-  const SUHU_LIMIT = 40;
-  const CAHAYA_LIMIT = 30;
-
-  // GIF URL
+  const SUHU_LIMIT = 30;
+  const CAHAYA_LIMIT = -1;
   const notifGifUrl = "https://media1.tenor.com/m/YwGfw1n8bTYAAAAC/ompangie-pentol.gif";
-  const relayGifUrl = "https://media1.tenor.com/m/OXRE1DOXQWsAAAAC/nintendo-switch-2-switch-2.gif";
 
-  // ========== FUNGSI JAM DIGITAL ==========
+  // ========== JAM ==========
   function updateClock() {
     const now = new Date();
-    
-    // Format jam
-    const jam = now.getHours().toString().padStart(2, '0');
-    const menit = now.getMinutes().toString().padStart(2, '0');
-    const detik = now.getSeconds().toString().padStart(2, '0');
-    const waktuString = `${jam}:${menit}:${detik}`;
-    
-    // Format tanggal
-    const hari = now.toLocaleDateString('id-ID', { weekday: 'long' });
-    const tanggal = now.getDate();
-    const bulan = now.toLocaleDateString('id-ID', { month: 'long' });
-    const tahun = now.getFullYear();
-    const tanggalString = `${hari}, ${tanggal} ${bulan} ${tahun}`;
-    
-    document.getElementById('jamDigital').innerHTML = waktuString;
-    document.getElementById('tanggalDigital').innerHTML = tanggalString;
+    document.getElementById('jamDigital').innerHTML = now.toLocaleTimeString('id-ID');
+    document.getElementById('tanggalDigital').innerHTML = now.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
   }
-  
-  // Jalankan jam setiap detik
   updateClock();
   setInterval(updateClock, 1000);
 
   // ========== NOTIFIKASI ==========
   function addNotification(message) {
-    const newNotif = {
-      id: Date.now(),
-      text: message,
-      time: new Date().toLocaleTimeString('id-ID')
-    };
-    notifications.unshift(newNotif);
+    notifications.unshift({ id: Date.now(), text: message, time: new Date().toLocaleTimeString('id-ID') });
     if (notifications.length > 12) notifications.pop();
-    renderNotifications();
-  }
-
-  function renderNotifications() {
     const container = document.getElementById('notifContainer');
-    if (!notifications.length) {
-      container.innerHTML = `<div class="notification-item"><img src="${notifGifUrl}" class="notif-gif"><div class="notif-text">Tidak ada notifikasi baru</div><div class="notif-time">-</div></div>`;
-      return;
-    }
     container.innerHTML = notifications.map(n => `
       <div class="notification-item">
-        <img src="${notifGifUrl}" class="notif-gif" alt="notif">
         <div class="notif-text">${n.text}</div>
         <div class="notif-time">${n.time}</div>
       </div>
     `).join('');
+    if (notifications.length === 0) {
+      container.innerHTML = '<div class="notification-item"><div class="notif-text">Tidak ada notifikasi</div></div>';
+    }
   }
+  document.getElementById('clearNotifBtn').onclick = () => { notifications = []; addNotification("Notifikasi dibersihkan"); };
 
-  document.getElementById('clearNotifBtn').addEventListener('click', () => {
-    notifications = [];
-    renderNotifications();
-    addNotification("Notifikasi telah dibersihkan");
-  });
-
-  // ========== UPDATE RELAY ==========
-  async function setRelay(value) {
-    if (currentRelay === value) return;
-    currentRelay = value;
+  // ========== UPDATE RELAY KE FIREBASE ==========
+  async function setRelay(value, source = 'manual') {
+    if (isUpdatingFromDashboard) {
+      console.log("Skip: sedang update dari dashboard");
+      return;
+    }
+    if (currentRelay === value) {
+      console.log(`Relay sudah ${value}, skip`);
+      return;
+    }
+    
+    isUpdatingFromDashboard = true;
+    
     try {
       await set(ref(db, 'sensor/relay'), value);
-      console.log(`Relay -> ${value}`);
+      console.log(`✅ Relay berubah: ${currentRelay} -> ${value} (${source})`);
+      currentRelay = value;
       
+      // Update UI
       const relayValueDiv = document.getElementById('relayValue');
       const relayGifImg = document.getElementById('relayGif');
       if (value === 1) {
@@ -545,58 +523,102 @@
         relayGifImg.style.filter = 'drop-shadow(0 0 4px #666)';
         document.getElementById('relayTime').innerHTML = 'Relay: MATI ⚫';
       }
+      
+      if (source === 'manual') {
+        addNotification(`🖱️ Manual: Relay ${value === 1 ? 'DINYALAKAN' : 'DIMATIKAN'}`);
+      }
+      
     } catch (err) {
       console.error("Gagal update relay:", err);
+      addNotification(`❌ Gagal: ${err.message}`);
+    } finally {
+      setTimeout(() => { isUpdatingFromDashboard = false; }, 300);
     }
   }
 
   // ========== KONTROL OTOMATIS ==========
+  // 🔥 INI YANG PENTING: Saat manualMode = true, fungsi ini TIDAK melakukan apa-apa!
   async function autoControl(suhu, cahaya) {
+    // JIKA MANUAL MODE AKTIF, ABIAIKAN SEMUA KONDISI SENSOR!
     if (manualMode) {
-      document.getElementById('waktuStatus').innerHTML = '🔧 Mode Manual';
-      document.getElementById('waktuStatus').className = 'sensor-status status-warning';
+      console.log("🔧 MANUAL MODE AKTIF - AutoControl DIABAIKAN, relay tidak berubah");
       return;
     }
-    document.getElementById('waktuStatus').innerHTML = '🤖 Mode Otomatis';
-    document.getElementById('waktuStatus').className = 'sensor-status status-online';
     
+    // Hanya berjalan jika mode AUTO
     let shouldOn = false;
-    let alasan = "";
+    let reason = '';
+    
     if (suhu > SUHU_LIMIT) {
       shouldOn = true;
-      alasan = `Suhu ${suhu.toFixed(1)}°C > ${SUHU_LIMIT}°C`;
+      reason = `Suhu ${suhu.toFixed(1)}°C > ${SUHU_LIMIT}°C`;
     } else if (cahaya < CAHAYA_LIMIT) {
       shouldOn = true;
-      alasan = `Cahaya ${cahaya.toFixed(0)} lx < ${CAHAYA_LIMIT} lx`;
+      reason = `Cahaya ${cahaya.toFixed(0)} lx < ${CAHAYA_LIMIT} lx`;
     }
-
+    
     if (shouldOn && currentRelay !== 1) {
-      await setRelay(1);
-      addNotification(`🔴 ${alasan} → Relay MENYALA`);
+      await setRelay(1, 'auto');
+      addNotification(`🤖 Auto: ${reason} → Relay ON`);
     } else if (!shouldOn && currentRelay !== 0) {
-      await setRelay(0);
-      addNotification(`⚫ Kondisi normal (Suhu ${suhu.toFixed(1)}°C, Cahaya ${cahaya.toFixed(0)}lx) → Relay MATI`);
+      await setRelay(0, 'auto');
+      addNotification(`🤖 Auto: Kondisi normal → Relay OFF`);
     }
   }
 
-  // ========== UPDATE TAMPILAN SENSOR ==========
-  function updateUI(suhu, cahaya, timestampStr) {
-    // Suhu
+  // ========== UPDATE UI MODE ==========
+  function updateModeUI() {
+    const manualButtons = document.getElementById('manualButtons');
+    const waktuStatus = document.getElementById('waktuStatus');
+    const manualBtn = document.getElementById('manualModeBtn');
+    const autoBtn = document.getElementById('autoModeBtn');
+    
+    if (manualMode) {
+      manualButtons.style.display = 'flex';
+      waktuStatus.innerHTML = '🔧 MANUAL MODE - Sensor DIABAIKAN!';
+      waktuStatus.className = 'sensor-status status-manual';
+      manualBtn.style.opacity = '1';
+      autoBtn.style.opacity = '0.6';
+      addNotification('🔧 MANUAL MODE: Relay akan PATUH pada tombol ON/OFF, sensor diabaikan!');
+    } else {
+      manualButtons.style.display = 'none';
+      waktuStatus.innerHTML = '🤖 AUTO MODE - Relay mengikuti suhu & cahaya';
+      waktuStatus.className = 'sensor-status status-online';
+      manualBtn.style.opacity = '0.6';
+      autoBtn.style.opacity = '1';
+      addNotification('🤖 AUTO MODE: Relay akan otomatis berdasarkan suhu & cahaya');
+    }
+  }
+
+  // ========== SET MODE ==========
+  function setManualMode() {
+    manualMode = true;
+    updateModeUI();
+    // Tidak mengubah relay saat ganti mode
+  }
+  
+  function setAutoMode() {
+    manualMode = false;
+    updateModeUI();
+    // Setelah pindah ke auto, langsung cek kondisi sensor
+    // Data sensor akan dipanggil dari listener
+  }
+
+  // ========== UPDATE UI SENSOR ==========
+  function updateUI(suhu, cahaya, waktuStr) {
     document.getElementById('suhuValue').innerHTML = `${suhu.toFixed(1)}<span class="sensor-unit">°C</span>`;
     const suhuStatus = document.getElementById('suhuStatus');
     suhuStatus.className = `sensor-status ${suhu > SUHU_LIMIT ? 'status-warning' : 'status-online'}`;
     suhuStatus.innerHTML = suhu > SUHU_LIMIT ? '⚠️ Panas' : '🟢 Normal';
-    document.getElementById('suhuTime').innerHTML = `⏱️ ${timestampStr}`;
+    document.getElementById('suhuTime').innerHTML = `⏱️ ${waktuStr}`;
 
-    // Cahaya
     document.getElementById('cahayaValue').innerHTML = `${cahaya.toFixed(0)}<span class="sensor-unit">lx</span>`;
     const cahayaStatus = document.getElementById('cahayaStatus');
     cahayaStatus.className = `sensor-status ${cahaya < CAHAYA_LIMIT ? 'status-warning' : 'status-online'}`;
     cahayaStatus.innerHTML = cahaya < CAHAYA_LIMIT ? '🌙 Gelap' : '💡 Terang';
-    document.getElementById('cahayaTime').innerHTML = `⏱️ ${timestampStr}`;
+    document.getElementById('cahayaTime').innerHTML = `⏱️ ${waktuStr}`;
 
-    // Status bar
-    document.getElementById('statusText').innerHTML = `✅ Suhu: ${suhu.toFixed(1)}°C  |  Cahaya: ${cahaya.toFixed(0)}lx  |  Relay: ${currentRelay}`;
+    document.getElementById('statusText').innerHTML = `✅ ${suhu.toFixed(1)}°C | ${cahaya.toFixed(0)}lx | Mode: ${manualMode ? 'MANUAL' : 'AUTO'}`;
     document.getElementById('lastUpdate').innerHTML = `Update: ${new Date().toLocaleTimeString('id-ID')}`;
   }
 
@@ -606,150 +628,114 @@
     if (chart) chart.destroy();
     chart = new Chart(ctx, {
       type: 'line',
-      data: {
-        labels: history.timestamps,
-        datasets: [{
-          label: 'Suhu (°C)',
-          data: history.suhu,
-          borderColor: '#a855f7',
-          backgroundColor: 'rgba(168,85,247,0.1)',
-          tension: 0.3,
-          fill: true,
-          pointBackgroundColor: '#c084fc'
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: true,
-        plugins: { legend: { labels: { color: '#ddd' } } },
-        scales: { y: { grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#ccc' } },
-                  x: { ticks: { color: '#ccc' } } }
-      }
+      data: { labels: history.timestamps, datasets: [{ label: 'Suhu (°C)', data: history.suhu, borderColor: '#a855f7', backgroundColor: 'rgba(168,85,247,0.1)', tension: 0.3, fill: true }] },
+      options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { labels: { color: '#ddd' } } }, scales: { y: { grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#ccc' } }, x: { ticks: { color: '#ccc' } } } }
     });
   }
 
   function addToHistory(suhu, cahaya) {
-    const now = new Date();
-    const label = now.toLocaleTimeString([], { hour:'2-digit', minute:'2-digit', second:'2-digit' });
+    const label = new Date().toLocaleTimeString([], { hour:'2-digit', minute:'2-digit', second:'2-digit' });
     history.timestamps.push(label);
     history.suhu.push(suhu);
     history.cahaya.push(cahaya);
-    if (history.timestamps.length > 20) {
-      history.timestamps.shift();
-      history.suhu.shift();
-      history.cahaya.shift();
-    }
+    if (history.timestamps.length > 20) { history.timestamps.shift(); history.suhu.shift(); history.cahaya.shift(); }
     if (!chart) initChart();
     else {
       chart.data.labels = history.timestamps;
       const selected = document.getElementById('chartSelect').value;
-      if (selected === 'suhu') {
-        chart.data.datasets[0].label = 'Suhu (°C)';
-        chart.data.datasets[0].data = history.suhu;
-        chart.data.datasets[0].borderColor = '#a855f7';
-      } else {
-        chart.data.datasets[0].label = 'Cahaya (lx)';
-        chart.data.datasets[0].data = history.cahaya;
-        chart.data.datasets[0].borderColor = '#fbbf24';
-      }
+      chart.data.datasets[0].label = selected === 'suhu' ? 'Suhu (°C)' : 'Cahaya (lx)';
+      chart.data.datasets[0].data = selected === 'suhu' ? history.suhu : history.cahaya;
+      chart.data.datasets[0].borderColor = selected === 'suhu' ? '#a855f7' : '#fbbf24';
       chart.update();
     }
   }
 
-  // ========== MANUAL MODE ==========
-  document.getElementById('manualRelayBtn').addEventListener('click', async () => {
-    manualMode = !manualMode;
-    const btn = document.getElementById('manualRelayBtn');
-    if (manualMode) {
-      btn.innerHTML = '🔧 Manual Mode ON';
-      btn.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
-      addNotification('🔧 Mode MANUAL diaktifkan');
-      const newState = currentRelay === 1 ? 0 : 1;
-      await setRelay(newState);
-      addNotification(`🖱️ Manual: Relay ${newState === 1 ? 'DINYALAKAN' : 'DIMATIKAN'}`);
-    } else {
-      btn.innerHTML = '🔧 Manual Control';
-      btn.style.background = 'linear-gradient(135deg, #a855f7, #7c3aed)';
-      addNotification('🤖 Mode OTOMATIS diaktifkan kembali');
-    }
-  });
+  // ========== SETUP TOMBOL ==========
+  function setupButtons() {
+    document.getElementById('manualModeBtn').onclick = setManualMode;
+    document.getElementById('autoModeBtn').onclick = setAutoMode;
+    document.getElementById('manualOnBtn').onclick = async () => {
+      if (manualMode) {
+        await setRelay(1, 'manual');
+      } else {
+        addNotification('⚠️ Aktifkan Mode Manual terlebih dahulu!');
+      }
+    };
+    document.getElementById('manualOffBtn').onclick = async () => {
+      if (manualMode) {
+        await setRelay(0, 'manual');
+      } else {
+        addNotification('⚠️ Aktifkan Mode Manual terlebih dahulu!');
+      }
+    };
+  }
 
-  // ========== GANTI CHART ==========
-  document.getElementById('chartSelect').addEventListener('change', (e) => {
+  // ========== CHART SELECT ==========
+  document.getElementById('chartSelect').addEventListener('change', () => {
     if (!chart) return;
-    const val = e.target.value;
-    if (val === 'suhu') {
-      chart.data.datasets[0].label = 'Suhu (°C)';
-      chart.data.datasets[0].data = history.suhu;
-      chart.data.datasets[0].borderColor = '#a855f7';
-    } else {
-      chart.data.datasets[0].label = 'Cahaya (lx)';
-      chart.data.datasets[0].data = history.cahaya;
-      chart.data.datasets[0].borderColor = '#fbbf24';
-    }
+    const selected = document.getElementById('chartSelect').value;
+    chart.data.datasets[0].label = selected === 'suhu' ? 'Suhu (°C)' : 'Cahaya (lx)';
+    chart.data.datasets[0].data = selected === 'suhu' ? history.suhu : history.cahaya;
+    chart.data.datasets[0].borderColor = selected === 'suhu' ? '#a855f7' : '#fbbf24';
     chart.update();
   });
 
-  // ========== BACA DATA FIREBASE ==========
+  // ========== FIREBASE LISTENER ==========
   function startListening() {
     const sensorRef = ref(db, 'sensor');
     onValue(sensorRef, (snapshot) => {
       const data = snapshot.val();
-      if (data && typeof data === 'object') {
-        let suhu = data.suhu !== undefined ? Number(data.suhu) : 0;
-        let cahaya = data.cahaya !== undefined ? Number(data.cahaya) : 0;
-        if (isNaN(suhu)) suhu = 0;
-        if (isNaN(cahaya)) cahaya = 0;
-        const nowLabel = new Date().toLocaleTimeString('id-ID');
+      if (data) {
+        const suhu = Number(data.suhu) || 0;
+        const cahaya = Number(data.cahaya) || 0;
+        const waktuStr = new Date().toLocaleTimeString('id-ID');
         
-        if (data.relay !== undefined && typeof data.relay === 'number') {
-          currentRelay = data.relay;
-          const relayDiv = document.getElementById('relayValue');
-          const relayGifImg = document.getElementById('relayGif');
-          if (currentRelay === 1) {
-            relayDiv.innerHTML = '🔴 ON'; relayDiv.style.color = '#ff8888';
-            relayGifImg.style.filter = 'drop-shadow(0 0 8px #ff6b6b)';
-            document.getElementById('relayTime').innerHTML = 'Relay: MENYALA 🔌';
-          } else {
-            relayDiv.innerHTML = '⚫ OFF'; relayDiv.style.color = '#aaa';
-            relayGifImg.style.filter = 'drop-shadow(0 0 4px #666)';
-            document.getElementById('relayTime').innerHTML = 'Relay: MATI ⚫';
+        // Update relay dari Firebase (tapi jangan loop)
+        if (data.relay !== undefined && !isUpdatingFromDashboard) {
+          const newRelay = typeof data.relay === 'number' ? data.relay : 0;
+          if (newRelay !== currentRelay) {
+            currentRelay = newRelay;
+            const relayValueDiv = document.getElementById('relayValue');
+            const relayGifImg = document.getElementById('relayGif');
+            if (currentRelay === 1) {
+              relayValueDiv.innerHTML = '🔴 ON';
+              relayValueDiv.style.color = '#ff8888';
+              relayGifImg.style.filter = 'drop-shadow(0 0 8px #ff6b6b)';
+              document.getElementById('relayTime').innerHTML = 'Relay: MENYALA 🔌';
+            } else {
+              relayValueDiv.innerHTML = '⚫ OFF';
+              relayValueDiv.style.color = '#aaa';
+              relayGifImg.style.filter = 'drop-shadow(0 0 4px #666)';
+              document.getElementById('relayTime').innerHTML = 'Relay: MATI ⚫';
+            }
           }
         }
         
-        updateUI(suhu, cahaya, nowLabel);
+        updateUI(suhu, cahaya, waktuStr);
         addToHistory(suhu, cahaya);
         
-        if (!manualMode) autoControl(suhu, cahaya);
-      } else {
-        document.getElementById('statusText').innerHTML = '⚠️ Node /sensor kosong';
+        // 🔥 PENTING: AutoControl akan dijalankan, tapi dia akan CEK manualMode di dalamnya
+        autoControl(suhu, cahaya);
       }
-    }, (error) => {
-      console.error("Firebase read error:", error);
-      document.getElementById('statusText').innerHTML = '❌ Koneksi Firebase error';
     });
   }
 
-  // ========== AUTHENTIKASI ==========
+  // ========== AUTH ==========
   onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      window.location.href = 'login.html';
-    } else {
-      document.getElementById('userEmail').innerText = user.email.split('@')[0];
-      startListening();
-      addNotification(`👋 Selamat datang, ${user.email.split('@')[0]}`);
-    }
+    if (!user) { window.location.href = 'login.html'; return; }
+    document.getElementById('userEmail').innerText = user.email.split('@')[0];
+    startListening();
+    setupButtons();
+    updateModeUI();
+    addNotification(`👋 Selamat datang, ${user.email.split('@')[0]}`);
   });
 
-  // ========== LOGOUT ==========
-  document.getElementById('logoutBtn').addEventListener('click', async (e) => {
+  document.getElementById('logoutBtn').onclick = async (e) => {
     e.preventDefault();
-    try {
-      await signOut(auth);
-      window.location.href = 'login.html';
-    } catch (err) { console.error(err); }
-  });
+    await signOut(auth);
+    window.location.href = 'login.html';
+  };
 
-  // Inisialisasi chart
   initChart();
 </script>
 </body>
